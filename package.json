@@ -1,0 +1,19 @@
+{
+	"name": "file-organizer",
+	"version": "1.0.0",
+	"description": "CLI tool for file organization, scanning, duplicate identification, and cleanup",
+	"type": "module",
+	"bin": {
+		"file-organizer": "./file-organizer.js"
+	},
+	"scripts": {
+		"scan": "node file-organizer.js scan",
+		"duplicates": "node file-organizer.js duplicates",
+		"organize": "node file-organizer.js organize",
+		"cleanup": "node file-organizer.js cleanup",
+		"test": "node --test test/*.test.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}
