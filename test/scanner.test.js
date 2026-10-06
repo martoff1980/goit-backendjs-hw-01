@@ -61,4 +61,36 @@ describe('Scanner Module', () => {
 		assert.equal(summary.largestFiles[0].relativePath, 'large.txt');
 		assert.equal(summary.oldestFile.relativePath, 'small.txt');
 	});
+
+	test('емітація події file-error при помилці доступу до файлу', async () => {
+		const filePath = path.join(tmpDir, 'unreadable.txt');
+		await fs.writeFile(filePath, 'Data');
+
+		const scanner = new Scanner();
+		let errorEmitted = false;
+
+		scanner.on('file-error', (data) => {
+			errorEmitted = true;
+			assert.ok(data.path.includes('unreadable.txt'));
+		});
+
+		// Підміняємо fs.stat, щоб він симулював помилку доступу (EACCES) для даного файлу
+		const originalStat = fs.stat;
+		fs.stat = async (p) => {
+			if (p === filePath) {
+				const err = new Error('Permission denied');
+				err.code = 'EACCES';
+				throw err;
+			}
+			return originalStat(p);
+		};
+
+		try {
+			await scanner.scan(tmpDir);
+			assert.ok(errorEmitted, 'Подія file-error повинна бути викликана');
+		} finally {
+			// Обов'язкове відновлення оригінального методу у блоці finally
+			fs.stat = originalStat;
+		}
+	});
 });
