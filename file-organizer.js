@@ -49,6 +49,10 @@ switch (command) {
 			console.log(`📂 Scanning: ${data.directory}`);
 		});
 
+		scanner.on('file-error', (data) => {
+			console.error(`\n⚠️ Skipped: ${path.basename(data.path)} (${data.error})`);
+		});
+
 		scanner.on('file-found', (data) => {
 			process.stdout.write(`Processing... ${drawProgressBar(data.current, data.total)} files\r`);
 		});
