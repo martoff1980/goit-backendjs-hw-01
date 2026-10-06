@@ -71,7 +71,7 @@ node file-organizer.js cleanup /path/to/directory --older-than 90 --confirm
 > node file-organizer.js scan .\file-organizer\
 
 📂 Scanning: C:\Education\GoIt\BackEnd_JavaScript\goit-backendjs-hw-01\file-organizer
-Processing... ███████████████░░░░░ 37/37 files
+Processing... ███████████████████ 37/37 files
 
 📊 Scan Results:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
