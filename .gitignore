@@ -53,3 +53,6 @@ SKILL.md
 
 # Misc
 *.tgz
+
+# Output folder for generated data
+OutputData/
