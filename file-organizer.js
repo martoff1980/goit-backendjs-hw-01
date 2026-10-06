@@ -158,6 +158,9 @@ switch (command) {
 			process.stdout.write(`Processing... ${drawProgressBar(data.current, data.total)}\r`);
 		});
 
+		organizer.on('copy-error', (data) => {
+			console.error(`\n⚠️ Skipped: ${data.file} ${data.error})`);
+		});
 		organizer.on('organize-complete', (res) => {
 			console.log('\n');
 			console.log('✅ Organization complete!\n');
