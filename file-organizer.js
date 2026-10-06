@@ -102,6 +102,10 @@ switch (command) {
 			process.stdout.write(`Calculating hashes... ${drawProgressBar(data.current, data.total)} files\r`);
 		});
 
+		finder.on('file-error', (data) => {
+			console.error(`\n⚠️ Skipped: ${path.basename(data.path)} ${data.error})`);
+		});
+
 		finder.on('duplicates-found', (res) => {
 			console.log('\n');
 			if (res.duplicateGroups.length === 0) {
